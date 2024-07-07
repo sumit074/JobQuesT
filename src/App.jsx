@@ -1,5 +1,6 @@
 import { Outlet, Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { Navbar, Footer } from "./components"
+
+import { Footer, Navbar } from "./components";
 import {
   About,
   AuthPage,
@@ -10,6 +11,7 @@ import {
   UploadJob,
   UserProfile,
 } from "./pages";
+import { useSelector } from "react-redux";
 
 function Layout() {
   const { user } = useSelector((state) => state.user);
@@ -22,21 +24,21 @@ function Layout() {
   );
 }
 
-
 function App() {
- const user = {};
+  const { user } = useSelector((state) => state.user);
   return (
-    <main>
+    <main className='bg-[#f7fdfd]'>
       <Navbar />
+
       <Routes>
-      <Route element={<Layout />}>
+        <Route element={<Layout />}>
           <Route
             path='/'
             element={<Navigate to='/find-jobs' replace={true} />}
           />
-           <Route path='/find-jobs' element={<FindJobs />} />
-           <Route path='/companies' element={<Companies />} />
-           <Route
+          <Route path='/find-jobs' element={<FindJobs />} />
+          <Route path='/companies' element={<Companies />} />
+          <Route
             path={
               user?.user?.accountType === "seeker"
                 ? "/user-profile"
@@ -49,13 +51,14 @@ function App() {
           <Route path={"/company-profile/:id"} element={<CompanyProfile />} />
           <Route path={"/upload-job"} element={<UploadJob />} />
           <Route path={"/job-detail/:id"} element={<JobDetail />} />
-          </Route>
-          <Route path='/about-us' element={<About />} />
+        </Route>
+
+        <Route path='/about-us' element={<About />} />
         <Route path='/user-auth' element={<AuthPage />} />
       </Routes>
       {user && <Footer />}
     </main>
-  )
+  );
 }
 
-export default App
+export default App;
