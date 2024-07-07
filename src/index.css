@@ -1,3 +1,4 @@
+
 :root {
   font-family: Inter, Arial, sans-serif;
   line-height: 1.5;
@@ -149,6 +150,7 @@ body {
     box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
   }
 }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
